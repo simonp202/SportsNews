@@ -1,0 +1,51 @@
+﻿@model TuVanDuHoc_v2.Models.EVENTDUHOC
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EVENTDUHOC</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TENEV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENEV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.THOIGIANTOCHUC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.THOIGIANTOCHUC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QUOCGIA.TENQG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QUOCGIA.TENQG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TRUONGHOC.TENTR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TRUONGHOC.TENTR)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MAEV }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

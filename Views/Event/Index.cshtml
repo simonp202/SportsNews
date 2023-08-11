@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TuVanDuHoc_v2.Models.EVENTDUHOC>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TENEV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.THOIGIANTOCHUC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QUOCGIA.TENQG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TRUONGHOC.TENTR)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TENEV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.THOIGIANTOCHUC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QUOCGIA.TENQG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TRUONGHOC.TENTR)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MAEV }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MAEV }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MAEV })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="~/Content/CSS/Nav.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Tư vấn du học</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <nav class=" container" style=" display: flex; align-items: center; justify-content: space-between">
+                <a href="http://localhost:64923/" id="logo">
+                    <img src="~/Images/Logo/Logo.jpg" alt="STA Education.vn" />
+                </a>
+                <ul id="main-menu">
+                    <li>
+                        <a href="">Tin tức</a>
+                        <ul class="sub-menu">
+                            <li><a href="http://localhost:64923/Home/News">Tổng quan</a></li>
+                            <li><a href="http://localhost:64923/Home/Blog">Blogs</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">IELTS</a>
+                        <ul class="sub-menu">
+                            <li><a href="http://localhost:64923/Home/IELTSExam">IELTS Exam</a></li>
+                            <li><a href="http://localhost:64923/Home/TestEnglish">Person Test of English</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">Tư vấn du học</a>
+                        <ul class="sub-menu">
+                            <li><a href="">Du học Mỹ</a></li>
+                            <li><a href="">Du học Canada</a></li>
+                            <li><a href="">Du học Australia</a></li>
+                            <li><a href="">Du học Nhật Bản</a></li>
+                            <li><a href="">Du học Singapore</a></li>
+                            <li><a href="">Du học Hàn Quốc</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">Cuộc sống</a>
+                        <ul class="sub-menu">
+                            <li><a href="http://localhost:64923/Life/America">Cuộc sống Mỹ</a></li>
+                            <li><a href="http://localhost:64923/Life/Canada">Cuộc sống Canada</a></li>
+                            <li><a href="http://localhost:64923/Life/Australia">Cuộc sống Australia</a></li>
+                            <li><a href="http://localhost:64923/Life/Japan">Cuộc sống Nhật Bản</a></li>
+                            <li><a href="http://localhost:64923/Life/Singapore">Cuộc sống Singapore</a></li>
+                            <li><a href="http://localhost:64923/Life/Korea">Cuộc sống Hàn Quốc</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="http://localhost:64923/Home/Contact">Liên hệ</a></li>
+                    <li><a href="http://localhost:64923/File/Index">Nộp hồ sơ Online</a></li>
+                    
+
+                </ul>
+            </nav>
+        </div>
+        </div>
+        @RenderBody()
+        <footer class="pt-3 pb-3 text-center">
+            <hr />
+            <p>&copy; @DateTime.Now.Year - Tư vấn du học</p>
+        </footer>
+
+        <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</body>
+</html>

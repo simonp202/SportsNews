@@ -1,0 +1,83 @@
+﻿@model TuVanDuHoc_v2.Models.TRUONGHOC
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TRUONGHOC</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TENTR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENTR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIACHITR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIACHITR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SDTTR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SDTTR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAILTR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAILTR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NGDAOTAO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NGDAOTAO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIEMCHUAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIEMCHUAN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HOCPHI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HOCPHI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QUOCGIA.TENQG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QUOCGIA.TENQG)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MATR }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

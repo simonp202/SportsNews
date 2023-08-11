@@ -1,0 +1,478 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tuvanduhocModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminUser">
+          <Key>
+            <PropertyRef Name="UsrName" />
+          </Key>
+          <Property Name="UsrName" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CHIPHI">
+          <Key>
+            <PropertyRef Name="MQCP" />
+          </Key>
+          <Property Name="MQCP" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="HOCPHI" Type="int" />
+          <Property Name="SINHHOAT" Type="int" />
+          <Property Name="NHA" Type="int" />
+          <Property Name="DILAI" Type="int" />
+          <Property Name="MAQG" Type="char" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="EVENTDUHOC">
+          <Key>
+            <PropertyRef Name="MAEV" />
+          </Key>
+          <Property Name="MAEV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TENEV" Type="nvarchar" MaxLength="100" />
+          <Property Name="MAQG" Type="char" MaxLength="5" />
+          <Property Name="MATR" Type="char" MaxLength="5" />
+          <Property Name="THOIGIANTOCHUC" Type="date" />
+        </EntityType>
+        <EntityType Name="HOSO">
+          <Key>
+            <PropertyRef Name="MAKH" />
+          </Key>
+          <Property Name="MAKH" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="TENKH" Type="nvarchar" MaxLength="100" />
+          <Property Name="DIACHIKH" Type="nvarchar" MaxLength="100" />
+          <Property Name="SDTKH" Type="char" MaxLength="15" />
+          <Property Name="NGAYSINH" Type="date" />
+          <Property Name="GIOITINH" Type="bit" />
+        </EntityType>
+        <EntityType Name="LIENHE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MAKH" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="MAQG" Type="char" MaxLength="5" />
+          <Property Name="NOIDUNG" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QUOCGIA">
+          <Key>
+            <PropertyRef Name="MAQG" />
+          </Key>
+          <Property Name="MAQG" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="TENQG" Type="nvarchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TRUONGHOC">
+          <Key>
+            <PropertyRef Name="MATR" />
+          </Key>
+          <Property Name="MATR" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="TENTR" Type="nvarchar" MaxLength="100" />
+          <Property Name="DIACHITR" Type="nvarchar" MaxLength="100" />
+          <Property Name="SDTTR" Type="nvarchar" MaxLength="100" />
+          <Property Name="EMAILTR" Type="varchar" MaxLength="100" />
+          <Property Name="NGDAOTAO" Type="nvarchar" MaxLength="100" />
+          <Property Name="DIEMCHUAN" Type="float" />
+          <Property Name="HOCPHI" Type="decimal" Precision="10" Scale="3" />
+          <Property Name="MAQG" Type="char" MaxLength="5" />
+        </EntityType>
+        <Association Name="FK__CHIPHI__MAQG__412EB0B6">
+          <End Role="QUOCGIA" Type="Self.QUOCGIA" Multiplicity="0..1" />
+          <End Role="CHIPHI" Type="Self.CHIPHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCGIA">
+              <PropertyRef Name="MAQG" />
+            </Principal>
+            <Dependent Role="CHIPHI">
+              <PropertyRef Name="MAQG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EVENTDUHOC__MAQG__3B75D760">
+          <End Role="QUOCGIA" Type="Self.QUOCGIA" Multiplicity="0..1" />
+          <End Role="EVENTDUHOC" Type="Self.EVENTDUHOC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCGIA">
+              <PropertyRef Name="MAQG" />
+            </Principal>
+            <Dependent Role="EVENTDUHOC">
+              <PropertyRef Name="MAQG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EVENTDUHOC__MATR__3C69FB99">
+          <End Role="TRUONGHOC" Type="Self.TRUONGHOC" Multiplicity="0..1" />
+          <End Role="EVENTDUHOC" Type="Self.EVENTDUHOC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRUONGHOC">
+              <PropertyRef Name="MATR" />
+            </Principal>
+            <Dependent Role="EVENTDUHOC">
+              <PropertyRef Name="MATR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LIENHE__MAKH__440B1D61">
+          <End Role="HOSO" Type="Self.HOSO" Multiplicity="1" />
+          <End Role="LIENHE" Type="Self.LIENHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOSO">
+              <PropertyRef Name="MAKH" />
+            </Principal>
+            <Dependent Role="LIENHE">
+              <PropertyRef Name="MAKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LIENHE__MAQG__44FF419A">
+          <End Role="QUOCGIA" Type="Self.QUOCGIA" Multiplicity="0..1" />
+          <End Role="LIENHE" Type="Self.LIENHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCGIA">
+              <PropertyRef Name="MAQG" />
+            </Principal>
+            <Dependent Role="LIENHE">
+              <PropertyRef Name="MAQG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TRUONGHOC__MAQG__38996AB5">
+          <End Role="QUOCGIA" Type="Self.QUOCGIA" Multiplicity="0..1" />
+          <End Role="TRUONGHOC" Type="Self.TRUONGHOC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCGIA">
+              <PropertyRef Name="MAQG" />
+            </Principal>
+            <Dependent Role="TRUONGHOC">
+              <PropertyRef Name="MAQG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tuvanduhocModelStoreContainer">
+          <EntitySet Name="AdminUser" EntityType="Self.AdminUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHIPHI" EntityType="Self.CHIPHI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENTDUHOC" EntityType="Self.EVENTDUHOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HOSO" EntityType="Self.HOSO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LIENHE" EntityType="Self.LIENHE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QUOCGIA" EntityType="Self.QUOCGIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRUONGHOC" EntityType="Self.TRUONGHOC" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CHIPHI__MAQG__412EB0B6" Association="Self.FK__CHIPHI__MAQG__412EB0B6">
+            <End Role="QUOCGIA" EntitySet="QUOCGIA" />
+            <End Role="CHIPHI" EntitySet="CHIPHI" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EVENTDUHOC__MAQG__3B75D760" Association="Self.FK__EVENTDUHOC__MAQG__3B75D760">
+            <End Role="QUOCGIA" EntitySet="QUOCGIA" />
+            <End Role="EVENTDUHOC" EntitySet="EVENTDUHOC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EVENTDUHOC__MATR__3C69FB99" Association="Self.FK__EVENTDUHOC__MATR__3C69FB99">
+            <End Role="TRUONGHOC" EntitySet="TRUONGHOC" />
+            <End Role="EVENTDUHOC" EntitySet="EVENTDUHOC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LIENHE__MAKH__440B1D61" Association="Self.FK__LIENHE__MAKH__440B1D61">
+            <End Role="HOSO" EntitySet="HOSO" />
+            <End Role="LIENHE" EntitySet="LIENHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LIENHE__MAQG__44FF419A" Association="Self.FK__LIENHE__MAQG__44FF419A">
+            <End Role="QUOCGIA" EntitySet="QUOCGIA" />
+            <End Role="LIENHE" EntitySet="LIENHE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TRUONGHOC__MAQG__38996AB5" Association="Self.FK__TRUONGHOC__MAQG__38996AB5">
+            <End Role="QUOCGIA" EntitySet="QUOCGIA" />
+            <End Role="TRUONGHOC" EntitySet="TRUONGHOC" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tuvanduhocModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminUser">
+          <Key>
+            <PropertyRef Name="UsrName" />
+          </Key>
+          <Property Name="UsrName" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CHIPHI">
+          <Key>
+            <PropertyRef Name="MQCP" />
+          </Key>
+          <Property Name="MQCP" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="HOCPHI" Type="Int32" />
+          <Property Name="SINHHOAT" Type="Int32" />
+          <Property Name="NHA" Type="Int32" />
+          <Property Name="DILAI" Type="Int32" />
+          <Property Name="MAQG" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="QUOCGIA" Relationship="Self.FK__CHIPHI__MAQG__412EB0B6" FromRole="CHIPHI" ToRole="QUOCGIA" />
+        </EntityType>
+        <EntityType Name="EVENTDUHOC">
+          <Key>
+            <PropertyRef Name="MAEV" />
+          </Key>
+          <Property Name="MAEV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENEV" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MAQG" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="MATR" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="THOIGIANTOCHUC" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="QUOCGIA" Relationship="Self.FK__EVENTDUHOC__MAQG__3B75D760" FromRole="EVENTDUHOC" ToRole="QUOCGIA" />
+          <NavigationProperty Name="TRUONGHOC" Relationship="Self.FK__EVENTDUHOC__MATR__3C69FB99" FromRole="EVENTDUHOC" ToRole="TRUONGHOC" />
+        </EntityType>
+        <EntityType Name="HOSO">
+          <Key>
+            <PropertyRef Name="MAKH" />
+          </Key>
+          <Property Name="MAKH" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENKH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DIACHIKH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SDTKH" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="NGAYSINH" Type="DateTime" Precision="0" />
+          <Property Name="GIOITINH" Type="Boolean" />
+          <NavigationProperty Name="LIENHEs" Relationship="Self.FK__LIENHE__MAKH__440B1D61" FromRole="HOSO" ToRole="LIENHE" />
+        </EntityType>
+        <EntityType Name="LIENHE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MAKH" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MAQG" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="NOIDUNG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="HOSO" Relationship="Self.FK__LIENHE__MAKH__440B1D61" FromRole="LIENHE" ToRole="HOSO" />
+          <NavigationProperty Name="QUOCGIA" Relationship="Self.FK__LIENHE__MAQG__44FF419A" FromRole="LIENHE" ToRole="QUOCGIA" />
+        </EntityType>
+        <EntityType Name="QUOCGIA">
+          <Key>
+            <PropertyRef Name="MAQG" />
+          </Key>
+          <Property Name="MAQG" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENQG" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CHIPHIs" Relationship="Self.FK__CHIPHI__MAQG__412EB0B6" FromRole="QUOCGIA" ToRole="CHIPHI" />
+          <NavigationProperty Name="EVENTDUHOCs" Relationship="Self.FK__EVENTDUHOC__MAQG__3B75D760" FromRole="QUOCGIA" ToRole="EVENTDUHOC" />
+          <NavigationProperty Name="LIENHEs" Relationship="Self.FK__LIENHE__MAQG__44FF419A" FromRole="QUOCGIA" ToRole="LIENHE" />
+          <NavigationProperty Name="TRUONGHOCs" Relationship="Self.FK__TRUONGHOC__MAQG__38996AB5" FromRole="QUOCGIA" ToRole="TRUONGHOC" />
+        </EntityType>
+        <EntityType Name="TRUONGHOC">
+          <Key>
+            <PropertyRef Name="MATR" />
+          </Key>
+          <Property Name="MATR" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENTR" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DIACHITR" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SDTTR" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EMAILTR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NGDAOTAO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DIEMCHUAN" Type="Double" />
+          <Property Name="HOCPHI" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="MAQG" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="EVENTDUHOCs" Relationship="Self.FK__EVENTDUHOC__MATR__3C69FB99" FromRole="TRUONGHOC" ToRole="EVENTDUHOC" />
+          <NavigationProperty Name="QUOCGIA" Relationship="Self.FK__TRUONGHOC__MAQG__38996AB5" FromRole="TRUONGHOC" ToRole="QUOCGIA" />
+        </EntityType>
+        <Association Name="FK__CHIPHI__MAQG__412EB0B6">
+          <End Role="QUOCGIA" Type="Self.QUOCGIA" Multiplicity="0..1" />
+          <End Role="CHIPHI" Type="Self.CHIPHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCGIA">
+              <PropertyRef Name="MAQG" />
+            </Principal>
+            <Dependent Role="CHIPHI">
+              <PropertyRef Name="MAQG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EVENTDUHOC__MAQG__3B75D760">
+          <End Role="QUOCGIA" Type="Self.QUOCGIA" Multiplicity="0..1" />
+          <End Role="EVENTDUHOC" Type="Self.EVENTDUHOC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCGIA">
+              <PropertyRef Name="MAQG" />
+            </Principal>
+            <Dependent Role="EVENTDUHOC">
+              <PropertyRef Name="MAQG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EVENTDUHOC__MATR__3C69FB99">
+          <End Role="TRUONGHOC" Type="Self.TRUONGHOC" Multiplicity="0..1" />
+          <End Role="EVENTDUHOC" Type="Self.EVENTDUHOC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRUONGHOC">
+              <PropertyRef Name="MATR" />
+            </Principal>
+            <Dependent Role="EVENTDUHOC">
+              <PropertyRef Name="MATR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LIENHE__MAKH__440B1D61">
+          <End Role="HOSO" Type="Self.HOSO" Multiplicity="1" />
+          <End Role="LIENHE" Type="Self.LIENHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOSO">
+              <PropertyRef Name="MAKH" />
+            </Principal>
+            <Dependent Role="LIENHE">
+              <PropertyRef Name="MAKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LIENHE__MAQG__44FF419A">
+          <End Role="QUOCGIA" Type="Self.QUOCGIA" Multiplicity="0..1" />
+          <End Role="LIENHE" Type="Self.LIENHE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCGIA">
+              <PropertyRef Name="MAQG" />
+            </Principal>
+            <Dependent Role="LIENHE">
+              <PropertyRef Name="MAQG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TRUONGHOC__MAQG__38996AB5">
+          <End Role="QUOCGIA" Type="Self.QUOCGIA" Multiplicity="0..1" />
+          <End Role="TRUONGHOC" Type="Self.TRUONGHOC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QUOCGIA">
+              <PropertyRef Name="MAQG" />
+            </Principal>
+            <Dependent Role="TRUONGHOC">
+              <PropertyRef Name="MAQG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tuvanduhocEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminUsers" EntityType="Self.AdminUser" />
+          <EntitySet Name="CHIPHIs" EntityType="Self.CHIPHI" />
+          <EntitySet Name="EVENTDUHOCs" EntityType="Self.EVENTDUHOC" />
+          <EntitySet Name="HOSOes" EntityType="Self.HOSO" />
+          <EntitySet Name="LIENHEs" EntityType="Self.LIENHE" />
+          <EntitySet Name="QUOCGIAs" EntityType="Self.QUOCGIA" />
+          <EntitySet Name="TRUONGHOCs" EntityType="Self.TRUONGHOC" />
+          <AssociationSet Name="FK__CHIPHI__MAQG__412EB0B6" Association="Self.FK__CHIPHI__MAQG__412EB0B6">
+            <End Role="QUOCGIA" EntitySet="QUOCGIAs" />
+            <End Role="CHIPHI" EntitySet="CHIPHIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EVENTDUHOC__MAQG__3B75D760" Association="Self.FK__EVENTDUHOC__MAQG__3B75D760">
+            <End Role="QUOCGIA" EntitySet="QUOCGIAs" />
+            <End Role="EVENTDUHOC" EntitySet="EVENTDUHOCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EVENTDUHOC__MATR__3C69FB99" Association="Self.FK__EVENTDUHOC__MATR__3C69FB99">
+            <End Role="TRUONGHOC" EntitySet="TRUONGHOCs" />
+            <End Role="EVENTDUHOC" EntitySet="EVENTDUHOCs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LIENHE__MAKH__440B1D61" Association="Self.FK__LIENHE__MAKH__440B1D61">
+            <End Role="HOSO" EntitySet="HOSOes" />
+            <End Role="LIENHE" EntitySet="LIENHEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LIENHE__MAQG__44FF419A" Association="Self.FK__LIENHE__MAQG__44FF419A">
+            <End Role="QUOCGIA" EntitySet="QUOCGIAs" />
+            <End Role="LIENHE" EntitySet="LIENHEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TRUONGHOC__MAQG__38996AB5" Association="Self.FK__TRUONGHOC__MAQG__38996AB5">
+            <End Role="QUOCGIA" EntitySet="QUOCGIAs" />
+            <End Role="TRUONGHOC" EntitySet="TRUONGHOCs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tuvanduhocModelStoreContainer" CdmEntityContainer="tuvanduhocEntities">
+          <EntitySetMapping Name="AdminUsers">
+            <EntityTypeMapping TypeName="tuvanduhocModel.AdminUser">
+              <MappingFragment StoreEntitySet="AdminUser">
+                <ScalarProperty Name="UsrName" ColumnName="UsrName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHIPHIs">
+            <EntityTypeMapping TypeName="tuvanduhocModel.CHIPHI">
+              <MappingFragment StoreEntitySet="CHIPHI">
+                <ScalarProperty Name="MQCP" ColumnName="MQCP" />
+                <ScalarProperty Name="HOCPHI" ColumnName="HOCPHI" />
+                <ScalarProperty Name="SINHHOAT" ColumnName="SINHHOAT" />
+                <ScalarProperty Name="NHA" ColumnName="NHA" />
+                <ScalarProperty Name="DILAI" ColumnName="DILAI" />
+                <ScalarProperty Name="MAQG" ColumnName="MAQG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENTDUHOCs">
+            <EntityTypeMapping TypeName="tuvanduhocModel.EVENTDUHOC">
+              <MappingFragment StoreEntitySet="EVENTDUHOC">
+                <ScalarProperty Name="MAEV" ColumnName="MAEV" />
+                <ScalarProperty Name="TENEV" ColumnName="TENEV" />
+                <ScalarProperty Name="MAQG" ColumnName="MAQG" />
+                <ScalarProperty Name="MATR" ColumnName="MATR" />
+                <ScalarProperty Name="THOIGIANTOCHUC" ColumnName="THOIGIANTOCHUC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOSOes">
+            <EntityTypeMapping TypeName="tuvanduhocModel.HOSO">
+              <MappingFragment StoreEntitySet="HOSO">
+                <ScalarProperty Name="MAKH" ColumnName="MAKH" />
+                <ScalarProperty Name="TENKH" ColumnName="TENKH" />
+                <ScalarProperty Name="DIACHIKH" ColumnName="DIACHIKH" />
+                <ScalarProperty Name="SDTKH" ColumnName="SDTKH" />
+                <ScalarProperty Name="NGAYSINH" ColumnName="NGAYSINH" />
+                <ScalarProperty Name="GIOITINH" ColumnName="GIOITINH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LIENHEs">
+            <EntityTypeMapping TypeName="tuvanduhocModel.LIENHE">
+              <MappingFragment StoreEntitySet="LIENHE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MAKH" ColumnName="MAKH" />
+                <ScalarProperty Name="MAQG" ColumnName="MAQG" />
+                <ScalarProperty Name="NOIDUNG" ColumnName="NOIDUNG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QUOCGIAs">
+            <EntityTypeMapping TypeName="tuvanduhocModel.QUOCGIA">
+              <MappingFragment StoreEntitySet="QUOCGIA">
+                <ScalarProperty Name="MAQG" ColumnName="MAQG" />
+                <ScalarProperty Name="TENQG" ColumnName="TENQG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRUONGHOCs">
+            <EntityTypeMapping TypeName="tuvanduhocModel.TRUONGHOC">
+              <MappingFragment StoreEntitySet="TRUONGHOC">
+                <ScalarProperty Name="MATR" ColumnName="MATR" />
+                <ScalarProperty Name="TENTR" ColumnName="TENTR" />
+                <ScalarProperty Name="DIACHITR" ColumnName="DIACHITR" />
+                <ScalarProperty Name="SDTTR" ColumnName="SDTTR" />
+                <ScalarProperty Name="EMAILTR" ColumnName="EMAILTR" />
+                <ScalarProperty Name="NGDAOTAO" ColumnName="NGDAOTAO" />
+                <ScalarProperty Name="DIEMCHUAN" ColumnName="DIEMCHUAN" />
+                <ScalarProperty Name="HOCPHI" ColumnName="HOCPHI" />
+                <ScalarProperty Name="MAQG" ColumnName="MAQG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
