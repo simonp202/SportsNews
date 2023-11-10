@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title - Sports News</title>
+        @* CSS File *@
+        <link rel="stylesheet" href="~/Resources/CSS/Manager.css" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @* Icon *@
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+
+    <body>
+        @* Thanh điều hướng *@
+        <div class="sidebar">
+            @* Logo *@
+            <div class="logo-content">
+                <div class="logo">
+                    <!-- Hình logo -->
+                    <img src="#" id="logoImg" />
+                </div>
+                <i class='bx bx-menu-alt-right' id="btn"></i>
+            </div>
+            @* Chức năng (Chuyển trang) *@
+            @if (Session["Admin"] != null)
+            {
+                @Html.Action("Toolbox", "Admin")
+                <!--Thông tin người dùng-->
+                <div class="profile-content">
+                    <div class="profile">
+                        <a href="#" class="fs-6 text-decoration-none text-white">
+                            <div class="profile-details">
+                                <!-- Hình người dùng-->
+                                <i class='bx bx-user' id="userImg"></i>
+                                <!-- Thông tin -->
+                                <div class="name-job">
+                                    <!-- Họ tên -->
+                                    <div class="name">@Session["Admin"].ToString()</div>
+                                    <!-- Chức vụ -->
+                                    <div class="job">Quản trị viên</div>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- Đăng xuất -->
+                        <a href="@Url.Action("Logout", "Admin")">
+                            <i class='bx bx-log-out' style='color:#ffffff' id="log_out"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <!--Thông tin người dùng-->
+                <div class="profile-content">
+                    <div class="profile">
+                        <div class="profile-details">
+                            <a href="@Url.Action("Index", "Admin")" class="text-decoration-none fs-6 text-white">
+                                <!-- Hình người dùng-->
+                                <i class='bx bx-user' id="userImg"></i>
+                                <!-- Thông tin -->
+                                <div class="name-job">
+                                    <!-- Họ tên -->
+                                    <div class="name">Đăng nhập</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        @* Nội dung trang *@
+        <div class="home-content">
+            @RenderBody()
+        </div>
+
+        <script src="~/Resources/JavaScript/managerNavBar.js"></script>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

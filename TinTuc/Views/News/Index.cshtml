@@ -2,69 +2,62 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
-
+<h2 class="text-uppercase">Quản lý bài viết</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Tạo bài viết", "Create", "News", null, new { @class = "btn btn-outline-primary" }) | 
+    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Tạo danh mục
+    </button>
+    @Html.Action("CatePartial", "Category")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.TieuDe)
+            Tên Danh mục
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NoiDung)
+            Tiêu đề
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NgayDang)
+            Nội dung
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HinhAnh)
+            Ngày đăng
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SoSao)
+            Đánh giá
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Admin.Password)
+            Hành động
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DMBanTin.TenDM)
-        </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TieuDe)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoiDung)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayDang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HinhAnh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoSao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Admin.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DMBanTin.TenDM)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DMBanTin.TenDM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TieuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDung)
+            </td>
+            <td>
+                @string.Format(item.NgayDang.ToString("dd/MM/yyyy"))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoSao)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", "News", new { id = item.ID }, new { @class = "btn btn-outline-warning" }) |
+                @Html.ActionLink("Xoá", "Delete", "News", new { id = item.ID }, new { @class = "btn btn-outline-danger" })
+            </td>
+        </tr>
+    }
 
 </table>
