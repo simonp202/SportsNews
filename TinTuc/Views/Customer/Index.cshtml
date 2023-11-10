@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TinTuc.Models.NguoiDung>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="text-uppercase">Quản lý người dùng</h2>
+<table class="table">
+    <tr>
+        <th>
+            Tài khoản
+        </th>
+        <th>
+            Tên người dùng
+        </th>
+        <th>
+            Ngày sinh
+        </th>
+        <th>
+            Giới tính
+        </th>
+        <th>Hành động</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenND)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgaySinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GioiTinh)
+        </td>
+        <td>
+            @Html.ActionLink("Xoá người dùng", "Delete", "Delete", new { id=item.UserName })
+        </td>
+    </tr>
+}
+
+</table>
