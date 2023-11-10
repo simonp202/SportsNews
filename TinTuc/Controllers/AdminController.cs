@@ -9,5 +9,13 @@ namespace TinTuc.Controllers
         {
             return View();
         }
+        public ActionResult Manager()
+        {
+            return View();  
+        }
+        public ActionResult Toolbox()
+        {
+            return PartialView();
+        }
     }
 }

@@ -1,3 +1,47 @@
 ﻿@{
     ViewBag.Title = "Trang chủ";
 }
+
+<section class="section">
+    <div class="container-fluid">
+        <div class="col">
+            <div class="row">
+                <div class="col-md-9">
+                    @*Phạm Minh Khánh làm nha :D*@
+                </div>
+                <div class="col-md-3">
+                    @using (Html.BeginForm("Search", "News", FormMethod.Get))
+                    {
+                        <label for="data" class="mb03">Tìm tin tức: </label>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <input name="data" class="form-control" type="text" placeholder="Nhập từ khoá..." />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="submit" value="Tìm kiếm" class="btn btn-outline-success" />
+                            </div>
+                        </div>
+                    }
+                    <h3 class="text-center">Bản tin mới nhất</h3>
+                    @for (int i = 0; i < 12; i++)
+                    {
+                        <div class="card mt-3 w-100">
+                            <a href="#" class="nav-link">
+                                <img src="#" class="card-img-top" alt="News">
+                                <div class="card-body">
+                                    <h5 class="card-title">Tiêu đề ngắn</h5>
+                                    <p class="card-text">
+                                        Nội dung ngắn
+                                        <br />
+                                        Some quick example text to build on the card title
+                                        and make up the bulk of the card's content.
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
