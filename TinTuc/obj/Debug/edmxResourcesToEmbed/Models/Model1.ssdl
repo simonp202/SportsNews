@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TinTucModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="TenAdmin" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BanTin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TieuDe" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NoiDung" Type="nvarchar(max)" />
+    <Property Name="NgayDang" Type="datetime" Nullable="false" />
+    <Property Name="HinhAnh" Type="nvarchar(max)" />
+    <Property Name="MaDM" Type="int" Nullable="false" />
+    <Property Name="SoSao" Type="int" />
+    <Property Name="TKAdmin" Type="char" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="IDBanTin" />
+    </Key>
+    <Property Name="UserName" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="IDBanTin" Type="int" Nullable="false" />
+    <Property Name="SoSao" Type="int" />
+    <Property Name="NoiDung" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="DMBanTin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDM" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NguoiDung">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="TenND" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NgaySinh" Type="date" />
+    <Property Name="GioiTinh" Type="int" />
+  </EntityType>
+  <Association Name="FK__BanTin__MaDM__3C69FB99">
+    <End Role="DMBanTin" Type="Self.DMBanTin" Multiplicity="1" />
+    <End Role="BanTin" Type="Self.BanTin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DMBanTin">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BanTin">
+        <PropertyRef Name="MaDM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BanTin__TKAdmin__3B75D760">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+    <End Role="BanTin" Type="Self.BanTin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="BanTin">
+        <PropertyRef Name="TKAdmin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__IDBanTi__4222D4EF">
+    <End Role="BanTin" Type="Self.BanTin" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BanTin">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="IDBanTin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Comment__UserNam__412EB0B6">
+    <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NguoiDung">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TinTucModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BanTin" EntityType="Self.BanTin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DMBanTin" EntityType="Self.DMBanTin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BanTin__MaDM__3C69FB99" Association="Self.FK__BanTin__MaDM__3C69FB99">
+      <End Role="DMBanTin" EntitySet="DMBanTin" />
+      <End Role="BanTin" EntitySet="BanTin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BanTin__TKAdmin__3B75D760" Association="Self.FK__BanTin__TKAdmin__3B75D760">
+      <End Role="Admin" EntitySet="Admin" />
+      <End Role="BanTin" EntitySet="BanTin" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__IDBanTi__4222D4EF" Association="Self.FK__Comment__IDBanTi__4222D4EF">
+      <End Role="BanTin" EntitySet="BanTin" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Comment__UserNam__412EB0B6" Association="Self.FK__Comment__UserNam__412EB0B6">
+      <End Role="NguoiDung" EntitySet="NguoiDung" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

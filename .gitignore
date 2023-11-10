@@ -1,0 +1,9 @@
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+bin/
+obj/Debug/
+bin/TinTuc.pdb
+bin/TinTuc.dll
+obj/Debug/TinTuc.csproj.AssemblyReference.cache
+obj/Debug/TinTuc.csproj.CopyComplete
+obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
