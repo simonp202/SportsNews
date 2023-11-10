@@ -1,0 +1,27 @@
+﻿@model TinTuc.Models.DMBanTin
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Tạo nhanh danh mục</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Create", "Category"))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label for="TenDM" class="mb-2">Tên Danh mục</label>
+                        <input type="text" name="TenDM" class="form-control" />
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                        <input type="submit" class="btn btn-success" value="Tạo mới" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

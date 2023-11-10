@@ -1,0 +1,35 @@
+﻿@model TinTuc.Models.Admin
+@{
+    ViewBag.Title = "Đăng nhập Quản trị viên";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="section">
+    <h2 class="text-center text-uppercase mt-3 mb-3">Đăng nhập Quản trị viên</h2>
+    <div class="container-fluid">
+        <div class="col">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @using (Html.BeginForm("Login", "Admin"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="mb-3">
+                            <label for="UserName" class="mb-2">Tài khoản: </label>
+                            <input type="text" name="UserName" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Password" class="mb-2">Mật khẩu: </label>
+                            <input type="password" name="Password" class="form-control" />
+                        </div>
+                        <div class="mb-3 text-center">
+                            <input type="submit" value="Đăng nhập" class="btn btn-outline-success" />
+                        </div>
+                    }
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </div>
+</section>
+

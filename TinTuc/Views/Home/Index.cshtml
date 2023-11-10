@@ -1,33 +1,47 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Trang chủ";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
-
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+<section class="section">
+    <div class="container-fluid">
+        <div class="col">
+            <div class="row">
+                <div class="col-md-9">
+                    @*Phạm Minh Khánh làm nha :D*@
+                </div>
+                <div class="col-md-3">
+                    @using (Html.BeginForm("Search", "News", FormMethod.Get))
+                    {
+                        <label for="data" class="mb03">Tìm tin tức: </label>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <input name="data" class="form-control" type="text" placeholder="Nhập từ khoá..." />
+                            </div>
+                            <div class="col-md-3">
+                                <input type="submit" value="Tìm kiếm" class="btn btn-outline-success" />
+                            </div>
+                        </div>
+                    }
+                    <h3 class="text-center">Bản tin mới nhất</h3>
+                    @for (int i = 0; i < 12; i++)
+                    {
+                        <div class="card mt-3 w-100">
+                            <a href="#" class="nav-link">
+                                <img src="#" class="card-img-top" alt="News">
+                                <div class="card-body">
+                                    <h5 class="card-title">Tiêu đề ngắn</h5>
+                                    <p class="card-text">
+                                        Nội dung ngắn
+                                        <br />
+                                        Some quick example text to build on the card title
+                                        and make up the bulk of the card's content.
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
-</main>
+</section>
