@@ -14,6 +14,7 @@ namespace TinTuc.Controllers
         public ActionResult Index()
         {
             var banTins = db.BanTins.Include(b => b.Admin).Include(b => b.DMBanTin);
+
             return View(banTins.ToList());
         }
 
@@ -29,14 +30,16 @@ namespace TinTuc.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(banTin);
         }
 
         // GET: News/Create
         public ActionResult Create()
         {
-            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "Password");
+            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName");
             ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM");
+
             return View();
         }
 
@@ -45,17 +48,18 @@ namespace TinTuc.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TieuDe,NoiDung,NgayDang,HinhAnh,MaDM,SoSao,TKAdmin")] BanTin banTin)
+        public ActionResult Create(BanTin banTin)
         {
             if (ModelState.IsValid)
             {
                 db.BanTins.Add(banTin);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-
-            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "Password", banTin.TKAdmin);
+            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName", banTin.TKAdmin);
             ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM", banTin.MaDM);
+
             return View(banTin);
         }
 
@@ -71,8 +75,9 @@ namespace TinTuc.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "Password", banTin.TKAdmin);
+            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName", banTin.TKAdmin);
             ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM", banTin.MaDM);
+
             return View(banTin);
         }
 
@@ -81,16 +86,18 @@ namespace TinTuc.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TieuDe,NoiDung,NgayDang,HinhAnh,MaDM,SoSao,TKAdmin")] BanTin banTin)
+        public ActionResult Edit(BanTin banTin)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(banTin).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "Password", banTin.TKAdmin);
+            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName", banTin.TKAdmin);
             ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM", banTin.MaDM);
+
             return View(banTin);
         }
 
@@ -106,6 +113,7 @@ namespace TinTuc.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(banTin);
         }
 
@@ -117,6 +125,7 @@ namespace TinTuc.Controllers
             BanTin banTin = db.BanTins.Find(id);
             db.BanTins.Remove(banTin);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

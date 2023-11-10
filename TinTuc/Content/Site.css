@@ -1,8 +1,16 @@
 ﻿* {
-    box-sizing: border-box;
+    box-sizing: border-box; 
 }
 .img-wrapper {
     width: 100%;
     height: auto;
     position: relative;
+}
+.section {
+    padding-top: 100px; 
+    padding-bottom: 100px; 
+    position: relative;
+}
+.textarea-none textarea {
+    resize: none;
 }

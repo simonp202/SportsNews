@@ -31,7 +31,7 @@
                     else
                     {
                         <li>
-                            <a href="@Url.Action("Index", "Login")" class="nav-link">Đăng xuất</a>
+                            <a href="@Url.Action("Logout", "Login")" class="nav-link">Đăng xuất</a>
                         </li>
                     }
                 </ul>
@@ -41,7 +41,7 @@
 
     @RenderBody()
 
-    <footer>
+    <footer class="text-center">
         <p>&copy; @DateTime.Now.Year - SportNews Inc.</p>
     </footer>
 
