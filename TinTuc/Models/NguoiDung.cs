@@ -14,19 +14,10 @@ namespace TinTuc.Models
     
     public partial class NguoiDung
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NguoiDung()
-        {
-            this.Comments = new HashSet<Comment>();
-        }
-    
         public string UserName { get; set; }
         public string Password { get; set; }
         public string TenND { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public Nullable<int> GioiTinh { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

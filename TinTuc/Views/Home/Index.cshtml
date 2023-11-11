@@ -1,6 +1,12 @@
-﻿@{
+﻿@using TinTuc.Models
+@{
+    TinTucEntities db = new TinTucEntities();
     ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<BanTin> news = db.BanTins.ToList();
 }
+
+<h2 class="text-center text-uppercase mt-3 mb-3">Trang chủ</h2>
 <t name="Homepage" t-name="website.homepage">
     <t t-call="website.layout">
         <t t-set="pageName" t-value="'homepage'" />
@@ -22,82 +28,20 @@
             <section class="s_three_columns o_cc o_cc2 o_colored_level pt64 pb64" style="margin-top:25px;" data-vcss="001" data-snippet="s_three_columns" data-name="Columns">
                 <div class="container">
                     <div class="row d-flex align-items-stretch">
-                        <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
-                            <div class="card text-bg-white h-100" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important;">
-                                <img class="card-img-top" src="~/IMG/sancho.jpg" alt="" loading="lazy" />
-                                <div class="card-body">
-                                    <h3 class="card-title">
-                                        "Cậu ấy không có thái độ đúng đắn khi chơi bóng cho Man United"
-                                    </h3>
-                                    <p class="card-text">
-                                        Nhận định về tình hình khó khăn hiện tại của Jadon Sancho, Beth Tucker cho rằng cựu sao Borussia Dortmund không cho thấy thái độ đúng đắn khi chơi bóng cho Manchester United...
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
-                            <div class="card text-bg-white h-100" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important;">
-                                <img class="card-img-top" src="~/IMG/7nui.jpg" alt="" loading="lazy" />
-                                <div class="card-body">
-                                    <h3 class="card-title">
-                                        Ten Hag giải thích lý do bỏ rơi Mount
-                                    </h3>
-                                    <p class="card-text">Mason Mount trở thành bản hợp đồng đầu tiên của Manchester United trong kỳ chuyển nhượng mùa hè được trao chiếc áo số 7 nổi tiếng sau khi đến Old Trafford từ Chelsea với bản hợp đồng trị giá 55 triệu bảng. Được kỳ vọng nhưng màn trình diễn tệ hại khiến anh mất suất đá chính.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
-                            <div class="card text-bg-white h-100" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important;">
-                                <img class="card-img-top" src="~/IMG/belnado.jpg" alt="" loading="lazy" />
-                                <div class="card-body">
-                                    <h3 class="card-title">
-                                        'Joker' khiến Liverpool đứng ngồi không yên là ai?
-                                    </h3>
-                                    <p class="card-text">Đội bóng vùng Merseyside đang để mắt đến ngôi sao trẻ mới nổi ở giải VĐQG Brazil - Lucas Beraldo.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="s_three_columns o_cc o_cc2 o_colored_level pt64 pb64" data-vcss="001" data-snippet="s_three_columns" data-name="Columns" style="background-image: none; margin-top:20px;">
-                <div class="container">
-                    <div class="row d-flex align-items-stretch">
-                        <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
-                            <div class="card text-bg-white h-100" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important;">
-                                <img class="card-img-top" src="~/IMG/tot.jpg" alt="" loading="lazy" data-mimetype="image/jpeg" data-original-id="741" data-original-src="/web/image/741-27359a8f/website.s_three_columns_default_image_1" data-mimetype-before-conversion="image/jpeg" />
-                                <div class="card-body">
-                                    <h3 class="card-title o_default_snippet_text">
-                                        Tottenham nhận tổn thất kép sau trận thua Chelsea
-                                    </h3>
-                                    <p class="card-text o_default_snippet_text">Trích dẫn từ Metro, HLV Ange Postecoglou tiết lộ tin xấu nhân sự của Tottenham Hotspur. Ở cuộc tiếp đón Chelsea, James Maddison tập tễnh vì chấn thương mắt cá, còn Micky van de Ven vài phút rời sân sau khi bị chấn thương gân kheo.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
-                            <div class="card text-bg-white h-100" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important;">
-                                <img class="card-img-top" src="~/IMG/holjung.jpg" alt="" loading="lazy" data-mimetype="image/jpeg" data-original-id="742" data-original-src="/web/image/742-4c7deb6b/website.s_three_columns_default_image_2" data-mimetype-before-conversion="image/jpeg" />
-                                <div class="card-body">
-                                    <h3 class="card-title o_default_snippet_text">
-                                        Công khai thái độ nội bộ, Hojlund nói thẳng về trình độ của Ten Hag
-                                    </h3>
-                                    <p class="card-text o_default_snippet_text">Phát biểu sau trận thua Copenhagen, Rasmus Hojlund khẳng định HLV Erik Ten Hag thực sự là một chiến lược gia đẳng cấp, người đã giúp đỡ anh rất nhiều kể từ thời điểm chuyển đến Old Trafford.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
-                            <div class="card text-bg-white h-100" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important;">
-                                <img class="card-img-top" src="~/IMG/rodrygo.jpg" alt="" loading="lazy" data-mimetype="image/jpeg" data-original-id="743" data-original-src="/web/image/743-d935e96b/website.s_three_columns_default_image_3" data-mimetype-before-conversion="image/jpeg" />
-                                <div class="card-body">
-                                    <h3 class="card-title o_default_snippet_text">
-                                        Rodrygo: "Một trận đấu hoàn hảo"
-                                    </h3>
-                                    <p class="card-text o_default_snippet_text">
-                                        Trao đổi với trang web chính thức của Real Madrid, ngôi sao người Brazil đã có những chia sẻ đáng chú ý xoay quanh trận thắng Braga.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        @foreach (BanTin banTin in news)
+                        {
+                         <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
+                             <div class="card text-bg-white h-100" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important;">
+                                 <img class="card-img-top" src="~/Resources/Images/News/@banTin.HinhAnh" alt="News" loading="lazy" />
+                                 <div class="card-body">
+                                     <h3 class="card-title">
+                                         @banTin.TieuDe
+                                     </h3>
+                                     <p class="card-text">@banTin.NoiDung</p>
+                                 </div>
+                             </div>
+                         </div>   
+                        }
                     </div>
                 </div>
             </section>
@@ -123,34 +67,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 s_media_list_item pt16 pb16" data-name="Media item" style="margin-top:20px;">
-                            <div class="row s_col_no_resize s_col_no_bgcolor g-0 align-items-center o_colored_level o_cc o_cc1 rounded" style="box-shadow: rgba(0,0,0,0.15) 0px 2px 4px 0px !important;">
-                                <div class="col-lg-4 align-self-stretch s_media_list_img_wrapper">
-                                    <img src="~/IMG/heaton-1053.jpg" class="s_media_list_img h-100 w-100" alt="" loading="lazy" data-mimetype="image/jpeg" data-original-id="722" data-original-src="/web/image/722-5edc7b3f/website.s_media_list_default_image_2" data-mimetype-before-conversion="image/jpeg" />
-                                </div>
-                                <div class="px-3 col-lg-8 s_media_list_body">
-                                    <h3 class="o_default_snippet_text">3 cầu thủ gần như chắc suất rời Man Utd vào cuối mùa</h3>
-                                    <p class="o_default_snippet_text">Cùng điểm qua những cái tên có khả năng cao sẽ nói lời chia tay với Manchester United sau khi mùa giải năm nay khép lại.</p>
-                                    <a href="#" class="o_default_snippet_text">
-                                        Xem thêm
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 s_media_list_item pt16 pb16" data-name="Media item" style="margin-top:20px" ;>
-                            <div class="row s_col_no_resize s_col_no_bgcolor g-0 align-items-center o_colored_level o_cc o_cc1 rounded" style="box-shadow: rgba(0,0,0,0.15) 0px 2px 4px 0px !important;">
-                                <div class="col-lg-4 align-self-stretch s_media_list_img_wrapper">
-                                    <img src="~/IMG/alonso.jpg" class="s_media_list_img h-100 w-100" alt="" loading="lazy" data-mimetype="image/jpeg" data-original-id="723" data-original-src="/web/image/723-ac4c2af2/website.s_media_list_default_image_3" data-mimetype-before-conversion="image/jpeg" />
-                                </div>
-                                <div class="px-3 col-lg-8 s_media_list_body">
-                                    <h3 class="o_default_snippet_text">Liệu Bayer Leverkusen có thể vô địch Bundesliga?</h3>
-                                    <p class="o_default_snippet_text">Bayer Leverkusen sau 10 vòng đầu Bundesliga đã thắng tới 9 và chỉ đánh rơi 2 điểm trước nhà ĐKVĐ Bayern Munich. Xabi Alonso thực sự đang biến nước Đức nằm trong bàn tay mình.</p>
-                                    <a href="#" class="o_default_snippet_text">
-                                        Xem thêm
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -158,8 +74,6 @@
                 <div class="container s_allow_columns">
                     <h2 class="display-3-fs o_default_snippet_text" style="text-align: center; margin-top:30px;">Ảnh nổi bật</h2>
                 </div>
-            </section>
-            <section class="s_title pt40 pb40 o_colored_level" data-vcss="001" data-snippet="s_title" data-name="Title" style="background-image: none;">
             </section>
             <section class="s_image_gallery o_spc-small o_masonry pt24 pb24 o_colored_level" data-vcss="001" data-columns="3" style="overflow: hidden; background-image: none;" data-snippet="s_images_wall" data-name="Images Wall">
                 <div class="container">
@@ -178,6 +92,7 @@
                         </div>
                     </div>
                 </div>
-            </section>  
+            </section>
         </div>
-</t>
+    </t>
+

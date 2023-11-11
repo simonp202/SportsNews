@@ -30,7 +30,7 @@ namespace TinTuc.Controllers
         {
             Session.Abandon();
 
-            return RedirectToAction("K dex");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]

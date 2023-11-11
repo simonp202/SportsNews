@@ -24,16 +24,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Comments">
-      <EntityTypeMapping TypeName="TinTucModel.Comment">
-        <MappingFragment StoreEntitySet="Comment">
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="IDBanTin" ColumnName="IDBanTin" />
-          <ScalarProperty Name="SoSao" ColumnName="SoSao" />
-          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DMBanTins">
       <EntityTypeMapping TypeName="TinTucModel.DMBanTin">
         <MappingFragment StoreEntitySet="DMBanTin">

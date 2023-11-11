@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -13,12 +14,23 @@ namespace TinTuc.Controllers
         // GET: News
         public ActionResult Index()
         {
-            var banTins = db.BanTins.Include(b => b.Admin).Include(b => b.DMBanTin);
+            if (Session["Admin"] != null)
+            {
+                var banTins = db.BanTins.Include(b => b.Admin).Include(b => b.DMBanTin);
 
-            return View(banTins.ToList());
+                return View(banTins.ToList());
+            }
+            
+            return RedirectToAction("Index", "Admin");
         }
+        // GET: News/Create
+        public ActionResult Create()
+        {
+            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName");
+            ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM");
 
-        // GET: News/Details/5
+            return View();
+        }
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -30,19 +42,11 @@ namespace TinTuc.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName", banTin.TKAdmin);
+            ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM", banTin.MaDM);
 
             return View(banTin);
         }
-
-        // GET: News/Create
-        public ActionResult Create()
-        {
-            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName");
-            ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM");
-
-            return View();
-        }
-
         // POST: News/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -50,8 +54,19 @@ namespace TinTuc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(BanTin banTin)
         {
+            banTin.TKAdmin = Session["Admin"].ToString().Trim();
+            banTin.SoSao = 0;
+            banTin.Admin = db.Admins.FirstOrDefault(k => k.UserName == banTin.TKAdmin);
             if (ModelState.IsValid)
             {
+                if(banTin.UploadImage != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(banTin.UploadImage.FileName);
+                    string extension = Path.GetExtension(banTin.UploadImage.FileName);
+                    fileName += extension;
+                    banTin.HinhAnh = fileName;
+                    banTin.UploadImage.SaveAs(Path.Combine(Server.MapPath(BanTin.SERVER_IMG_PATH), fileName));
+                }
                 db.BanTins.Add(banTin);
                 db.SaveChanges();
 
@@ -66,19 +81,24 @@ namespace TinTuc.Controllers
         // GET: News/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["Admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            BanTin banTin = db.BanTins.Find(id);
-            if (banTin == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName", banTin.TKAdmin);
-            ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM", banTin.MaDM);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                BanTin banTin = db.BanTins.Find(id);
+                if (banTin == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName", banTin.TKAdmin);
+                ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM", banTin.MaDM);
 
-            return View(banTin);
+                return View(banTin);
+            }
+
+            return RedirectToAction("Index", "Admin");
         }
 
         // POST: News/Edit/5
