@@ -31,7 +31,22 @@ namespace TinTuc.Controllers
 
             return View();
         }
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            BanTin banTin = db.BanTins.Find(id);
+            if (banTin == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName", banTin.TKAdmin);
+            ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM", banTin.MaDM);
 
+            return View(banTin);
+        }
         // POST: News/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -41,6 +56,7 @@ namespace TinTuc.Controllers
         {
             banTin.TKAdmin = Session["Admin"].ToString().Trim();
             banTin.SoSao = 0;
+            banTin.Admin = db.Admins.FirstOrDefault(k => k.UserName == banTin.TKAdmin);
             if (ModelState.IsValid)
             {
                 if(banTin.UploadImage != null)
@@ -65,19 +81,24 @@ namespace TinTuc.Controllers
         // GET: News/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["Admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            BanTin banTin = db.BanTins.Find(id);
-            if (banTin == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName", banTin.TKAdmin);
-            ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM", banTin.MaDM);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                BanTin banTin = db.BanTins.Find(id);
+                if (banTin == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName", banTin.TKAdmin);
+                ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM", banTin.MaDM);
 
-            return View(banTin);
+                return View(banTin);
+            }
+
+            return RedirectToAction("Index", "Admin");
         }
 
         // POST: News/Edit/5

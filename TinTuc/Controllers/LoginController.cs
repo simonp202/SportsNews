@@ -11,8 +11,6 @@ namespace TinTuc.Controllers
         // GET: Login
         public ActionResult Index() => View();
         public ActionResult Register() => View();
-        public ActionResult AdminLogin() => View();
-        public ActionResult AdminRegister() => View();
 
         // POST: Login
         [HttpPost]
@@ -30,7 +28,7 @@ namespace TinTuc.Controllers
                 {
                     Session["Customer"] = checkLogin.TenND;
 
-                    return RedirectToActionPermanent("Index", "News");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -43,7 +41,7 @@ namespace TinTuc.Controllers
             {
                 ViewBag.UserError = "Lỗi hệ thống!";
 
-                return View();
+                return View("Index");
             }
         }
         [HttpPost]
@@ -72,18 +70,6 @@ namespace TinTuc.Controllers
 
                 return View();
             }
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AdminLogin(Admin admin)
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AdminRegister(Admin admin)
-        {
-            return View();
         }
     }
 }
