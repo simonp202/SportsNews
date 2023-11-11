@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -13,27 +14,15 @@ namespace TinTuc.Controllers
         // GET: News
         public ActionResult Index()
         {
-            var banTins = db.BanTins.Include(b => b.Admin).Include(b => b.DMBanTin);
-
-            return View(banTins.ToList());
-        }
-
-        // GET: News/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            if (Session["Admin"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            BanTin banTin = db.BanTins.Find(id);
-            if (banTin == null)
-            {
-                return HttpNotFound();
-            }
+                var banTins = db.BanTins.Include(b => b.Admin).Include(b => b.DMBanTin);
 
-            return View(banTin);
+                return View(banTins.ToList());
+            }
+            
+            return RedirectToAction("Index", "Admin");
         }
-
         // GET: News/Create
         public ActionResult Create()
         {
@@ -50,8 +39,18 @@ namespace TinTuc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(BanTin banTin)
         {
+            banTin.TKAdmin = Session["Admin"].ToString().Trim();
+            banTin.SoSao = 0;
             if (ModelState.IsValid)
             {
+                if(banTin.UploadImage != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(banTin.UploadImage.FileName);
+                    string extension = Path.GetExtension(banTin.UploadImage.FileName);
+                    fileName += extension;
+                    banTin.HinhAnh = fileName;
+                    banTin.UploadImage.SaveAs(Path.Combine(Server.MapPath(BanTin.SERVER_IMG_PATH), fileName));
+                }
                 db.BanTins.Add(banTin);
                 db.SaveChanges();
 

@@ -27,7 +27,6 @@ namespace TinTuc.Models
     
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<BanTin> BanTins { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<DMBanTin> DMBanTins { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
     }

@@ -10,28 +10,24 @@
 namespace TinTuc.Models
 {
     using System;
-    using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class BanTin
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BanTin()
-        {
-            this.Comments = new HashSet<Comment>();
-        }
-    
+        public static readonly string SERVER_IMG_PATH = "~/Resources/Images/News/";
         public int ID { get; set; }
         public string TieuDe { get; set; }
         public string NoiDung { get; set; }
         public System.DateTime NgayDang { get; set; }
         public string HinhAnh { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase UploadImage { get; set; }
         public int MaDM { get; set; }
         public Nullable<int> SoSao { get; set; }
         public string TKAdmin { get; set; }
     
         public virtual Admin Admin { get; set; }
         public virtual DMBanTin DMBanTin { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
