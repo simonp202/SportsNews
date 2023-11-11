@@ -4,10 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Sport News</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <header>
+        <a href="http://localhost:53197/">
+            <img src="~/IMG/LogoSportNews.png" style="width:auto; height:200px;margin-left:70px;" />
+        </a>
+    </header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
             <a href="@Url.Action("Index", "Home")" class="navbar-brand">
@@ -20,6 +26,9 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Trang chủ", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Tin mới nhất", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Thể thao", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Bảng xếp hạng", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
                 <ul class="navbar-nav d-flex flex-row-reverse">
                     @if (Session["Customer"] == null)
@@ -41,8 +50,83 @@
 
     @RenderBody()
 
-    <footer class="text-center">
-        <p>&copy; @DateTime.Now.Year - SportNews Inc.</p>
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <!-- Left -->
+            <div class="me-5 d-none d-lg-block">
+                <span>Mạng xã hội:</span>
+            </div>
+            <!-- Left -->
+            <!-- Right -->
+            <div class="social-network" style="margin-right:850px;">
+                <a href="" class="me-4 text-reset">
+                    <i class="social-nav__link-icon social-nav__link--twitter-icon"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100087669636851" class="me-4 text-reset">
+                    <i class="zmdi zmdi-facebook-box"></i>
+                </a>
+                <a href="#" class="me-4 text-reset">
+                    <i class="zmdi zmdi-twitter-box"></i>
+                </a>
+                <a href="#" class="me-4 text-reset">
+                    <i class="zmdi zmdi-instagram"></i>
+                </a>
+                <a href="https://github.com/simonp202" class="me-4 text-reset">
+                    <i class="zmdi zmdi-github-alt"></i>
+                </a>
+            </div>
+        </section>
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <div class="row mt-3">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>Sport News
+                        </h6>
+                        <p>
+                            Chịu trách nhiệm nội dung: Phạm Minh Khánh & Nguyễn Trí
+                            Sport News phát triển bởi HUFLIT Yêu Thể Thao.
+                        </p>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Liên Quan
+                        </h6>
+                        <p>
+                            <a href="https://www.bongda.com.vn/" class="text-reset">Bongda</a>
+                        </p>
+                        <p>
+                            <a href="https://www.skysports.com/" class="text-reset">Sky Sports</a>
+                        </p>
+                        <p>
+                            <a href="https://thethao247.vn/" class="text-reset">THỂ THAO 247</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Liên hệ
+                        </h6>
+                        <p>
+                            <a href="" class="text-reset">HOTLINE: 0373040869</a>
+                        </p>
+                        <p>
+                            <a href="https://www.facebook.com/profile.php?id=100087669636851" class="text-reset">ADMIN</a>
+                        </p>
+                    </div>
+                   </div>
+            </div>
+        </section>
+
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2021 Copyright:
+            <a class="text-reset fw-bold" href="https://www.facebook.com/groups/k27.huflit.cntt">IT HUFLIT</a>
+        </div>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")
