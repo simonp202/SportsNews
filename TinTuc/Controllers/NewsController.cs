@@ -38,24 +38,19 @@ namespace TinTuc.Controllers
         }
         public ActionResult Details(int? id)
         {
-            if (Session["Admin"] != null)
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                BanTin banTin = db.BanTins.Find(id);
-                if (banTin == null)
-                {
-                    return HttpNotFound();
-                }
-                ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName", banTin.TKAdmin);
-                ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM", banTin.MaDM);
-
-                return View(banTin);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            BanTin banTin = db.BanTins.Find(id);
+            if (banTin == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.TKAdmin = new SelectList(db.Admins, "UserName", "UserName", banTin.TKAdmin);
+            ViewBag.MaDM = new SelectList(db.DMBanTins, "ID", "TenDM", banTin.MaDM);
 
-            return RedirectToAction("Index", "Admin");
+            return View(banTin);
         }
         // POST: News/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 

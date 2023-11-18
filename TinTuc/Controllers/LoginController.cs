@@ -50,6 +50,8 @@ namespace TinTuc.Controllers
         {
             try
             {
+                string authTmp = SHA256.ToSHA256(user.Password);
+                user.Password = authTmp;
                 if (ModelState.IsValid)
                 {
                     db.NguoiDungs.Add(user);
