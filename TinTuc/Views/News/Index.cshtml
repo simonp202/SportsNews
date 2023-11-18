@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2 class="text-uppercase">Quản lý bài viết</h2>
+<h2 class="text-uppercase mt-3 mb-3">Quản lý bài viết</h2>
 <p>
     @Html.ActionLink("Tạo bài viết", "Create", "News", null, new { @class = "btn btn-outline-primary" }) | 
     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -16,13 +16,13 @@
 <table class="table">
     <tr>
         <th>
+            ID bài báo
+        </th>
+        <th>
             Tên Danh mục
         </th>
-        <th>
+        <th style="width: 25%;">
             Tiêu đề
-        </th>
-        <th>
-            Nội dung
         </th>
         <th>
             Ngày đăng
@@ -39,13 +39,13 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.DMBanTin.TenDM)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TieuDe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoiDung)
             </td>
             <td>
                 @string.Format(item.NgayDang.ToString("dd/MM/yyyy"))

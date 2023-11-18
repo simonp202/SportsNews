@@ -1,25 +1,22 @@
 ﻿@model TinTuc.Models.BanTin
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Chỉnh sửa bản tin";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@Html.ActionLink(" < Quay về", "Index", "News", null, new { @class = "btn btn-primary mt-3 mb-3" })
 <div class="container">
-    <h2 class="text-uppercase">Chỉnh sửa bản tin</h2>
+    <h2 class="text-uppercase">Tạo bản tin mới</h2>
     <hr />
     <div class="col">
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
                 @using (Html.BeginForm("Edit", "News", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                 {
-                    @Html.AntiForgeryToken()
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         @Html.HiddenFor(model => model.Admin.TenAdmin)
                         @Html.HiddenFor(model => model.SoSao)
-                        @Html.HiddenFor(model => model.NgayDang)
                         <div class="mb-3">
                             <label for="MaDM" class="mb-2">Danh mục</label>
                             @Html.DropDownList("MaDM", null, htmlAttributes: new { @class = "form-control" })
@@ -30,10 +27,15 @@
                             @Html.EditorFor(model => model.TieuDe, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.TieuDe, "", new { @class = "text-danger" })
                         </div>
-                        <div class="mb-3 textarea-none">
+                        <div class="mb-3">
                             <label for="NoiDung" class="mb-2">Nội dung</label>
-                            <textarea class="form-control" rows="7" name="NoiDung" value="@Model.NoiDung"></textarea>
+                            <textarea class="form-control" name="NoiDung" rows="10"></textarea>
                             @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3">
+                            <label for="NgayDang" class="mb-2">Ngày đăng</label>
+                            <input type="date" name="NgayDang" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.NgayDang, "", new { @class = "text-danger" })
                         </div>
                         <div class="mb-3">
                             <label for="UploadImage" class="mb-2">Hình ảnh</label>
@@ -41,15 +43,31 @@
                             @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
                         </div>
                         <div class="mb-3">
-                            <input type="submit" value="Tạo mới" class="mx-3 btn btn-outline-success" />
+                            <input type="submit" value="Lưu lại" class="mx-3 btn btn-outline-success" />
                         </div>
                     </div>
                 }
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 </div>
+
+@*Scripts for RTB editor*@
+<!--<script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+    });
+</script>-->
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
