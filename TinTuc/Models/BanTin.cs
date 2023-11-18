@@ -31,7 +31,7 @@ namespace TinTuc.Models
         public virtual Admin Admin { get; set; }
         public virtual DMBanTin DMBanTin { get; set; }
 
-        public static string GetSortText(string s)
+        public static string GetShortText(string s)
         {
             if(s.Length <= 30)
             {
@@ -39,7 +39,7 @@ namespace TinTuc.Models
             }
 
             StringBuilder sb = new StringBuilder();
-            for(int i = 0; i < 30; i++)
+            for(int i = 0; i < 80; i++)
                 sb.Append(s[i]);
 
             return sb.ToString() + "...";

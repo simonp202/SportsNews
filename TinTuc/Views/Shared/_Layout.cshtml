@@ -40,7 +40,10 @@
                     else
                     {
                         <li>
-                            <a href="@Url.Action("Logout", "Login")" class="nav-link">Đăng xuất</a>
+                            <a href="@Url.Action("Logout", "Customer")" class="nav-link">Đăng xuất</a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link" disabled>Xin chào, @Session["Customer"].ToString()</a>
                         </li>
                     }
                 </ul>
