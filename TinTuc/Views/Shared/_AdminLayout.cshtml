@@ -1,29 +1,24 @@
 ﻿<!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="viewport" content="width=device-width" />
-        <title>@ViewBag.Title - Sports News</title>
-        @* CSS File *@
-        <link rel="stylesheet" href="~/Resources/CSS/Manager.css" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-        @* Icon *@
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Sports News</title>
+    @* CSS File *@
+    <link rel="stylesheet" href="~/Resources/CSS/Manager.css" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @* Icon *@
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    @*Scripts of RTB editor*@
+    <script src="https://cdn.tiny.cloud/1/6bfd78k4al1msrco9k23xq5o1j8vznv2mo8y7jof96klryli/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
 
     <body>
         @* Thanh điều hướng *@
         <div class="sidebar">
-            @* Logo *@
-            <div class="logo-content">
-                <div class="logo">
-                    <!-- Hình logo -->
-                    <img src="~/IMG/Banner lùa gà.png" id="logoImg" />
-                </div>
-                <i class='bx bx-menu-alt-right' id="btn"></i>
-            </div>
+            <img src="~/Resources/Images/Logo/sports-logo.png" id="logoImg" width="60" height="60" />
             @* Chức năng (Chuyển trang) *@
             @if (Session["Admin"] != null)
             {
