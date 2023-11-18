@@ -16,13 +16,13 @@
 <table class="table">
     <tr>
         <th>
+            ID bài báo
+        </th>
+        <th>
             Tên Danh mục
         </th>
-        <th>
+        <th style="width: 25%;">
             Tiêu đề
-        </th>
-        <th>
-            Nội dung
         </th>
         <th>
             Ngày đăng
@@ -39,13 +39,13 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.DMBanTin.TenDM)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TieuDe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoiDung)
             </td>
             <td>
                 @string.Format(item.NgayDang.ToString("dd/MM/yyyy"))

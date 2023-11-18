@@ -11,6 +11,7 @@ namespace TinTuc.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Text;
     using System.Web;
 
     public partial class BanTin
@@ -29,5 +30,19 @@ namespace TinTuc.Models
     
         public virtual Admin Admin { get; set; }
         public virtual DMBanTin DMBanTin { get; set; }
+
+        public static string GetSortText(string s)
+        {
+            if(s.Length <= 30)
+            {
+                return s;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < 30; i++)
+                sb.Append(s[i]);
+
+            return sb.ToString() + "...";
+        }
     }
 }
